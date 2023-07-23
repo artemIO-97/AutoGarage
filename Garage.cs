@@ -1,42 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Runtime.Serialization;
+using System.Runtime.Serialization.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace AutoGarage
 {
-    internal class Garage:StartMenu
+    [DataContract]
+    internal class Garage
     {
-       
+        [DataMember]
         public string AutoName { get; set; }
+        [DataMember]
         public string EngineType { get; set; }
+        [DataMember]
         public double ValueEngine { get; set; }
+        [DataMember]
         public int YearAuto { get; set; }
-        public string InputAuto()
+        
+        public void InputAuto(string autoName,string engineType, double valueEngine, int yearAuto)
         {
-            var printGraphMenu = new Garage().PrintGraphMenu;
+            
             Console.Write("Введите марку и модель авто ");
-            AutoName = Console.ReadLine();
-            printGraphMenu();
+
+            autoName = Console.ReadLine();
+            AutoName = autoName;
+           
+           
             Console.Write("Введите тип двигателя ");
-            EngineType = Console.ReadLine();
-            printGraphMenu();
+            engineType = Console.ReadLine();
+            EngineType = engineType;
             Console.Write("Введите объем двигателя ");
-            ValueEngine = Convert.ToDouble(Console.ReadLine()) ;
-            printGraphMenu();
+
+             valueEngine = Convert.ToDouble(Console.ReadLine()) ;
+            ValueEngine = valueEngine;
+
+
             Console.Write("Введите год авто ");
-            YearAuto = Convert.ToInt32(Console.ReadLine());
-            printGraphMenu();
-            return $"{AutoName},{EngineType},{ValueEngine},{YearAuto}"; // Заготовка для вывода в xml (пока не придумал как)
-        } // метод для ввода данных и вывода в xml файл
+             yearAuto = Convert.ToInt32(Console.ReadLine());
+            YearAuto = yearAuto;
+            var json = new JsonEngine();
+            json.goToJson();
+
+
+
+
+
+        } 
+     
+
         public void PrintGarageMenu()
         {
-            var printGraphMenu = new Garage().PrintGraphMenu;
+            var printGraphMenu = new Garage();
             Console.WriteLine("Ваш гараж");
-            printGraphMenu();
-            var garage = new Garage();
-            garage.InputAuto();
+            printGraphMenu.InputAuto(AutoName, EngineType, ValueEngine, YearAuto) ;
+            
+            
             
         }
     }

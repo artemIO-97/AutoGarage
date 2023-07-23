@@ -23,7 +23,8 @@ namespace AutoGarage
                InputStartMenuGarage = true;
                 Console.Clear();
                 var garage = new Garage();
-                garage.PrintGarageMenu();             // тут запихиваем логику перехода на другой экран (гараж)
+                garage.PrintGarageMenu();
+                // тут запихиваем логику перехода на другой экран (гараж)
             }
             if (InpytStartMenu == (int)InputStartMenu.History)
             {
